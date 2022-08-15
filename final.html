@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>PowerBI Embedded HTML</title>
+  <meta charset="utf-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="scripts/powerbi.js"></script>
+</head>
+
+<body>
+  <div id="embedContainer" style="height:90%; width:90%">
+  </div>
+  <script>
+   
+    var txtAccessToken = 'put the access token here'
+    var txtEmbedUrl = 'Put your Embedurl here';
+    var txtEmbedReportId = 'put the report id here';
+      
+
+    function show_default () {
+      var models = window['powerbi-client'].models;
+      var permissions = models.Permissions.All;
+      var config = {
+        type: 'report',
+        tokenType: models.TokenType.Embed,
+        accessToken: txtAccessToken,
+        embedUrl: txtEmbedUrl,
+        id: txtEmbedReportId,
+        permissions: permissions,
+        settings: {
+          filterPaneEnabled: true,
+          navContentPaneEnabled: true
+        }
+      };
+ 
+      var embedContainer = document.getElementById('embedContainer');
+      var report = powerbi.embed(embedContainer, config);
+    }
+  </script>
+</body>
+</html>
